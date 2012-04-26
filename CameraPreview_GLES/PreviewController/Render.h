@@ -27,7 +27,7 @@
     GLuint yTexture;
     GLuint uvTexture;
     
-    CAEAGLLayer *_layer;
+     CAEAGLLayer *_layer;
     
     CVPixelBufferRef imageBuffer;
 }
