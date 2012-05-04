@@ -24,3 +24,6 @@ build/
 *~.nib
 \#*#
 .#*
+.DS_Store
+
+CameraPreview_GLES/.DS_Store
