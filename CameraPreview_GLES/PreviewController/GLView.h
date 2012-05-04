@@ -9,25 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES2/glext.h>
-#import <CoreVideo/CVOpenGLESTextureCache.h>
 
 #import "Render.h"
 
 @interface GLView : UIView
 {
-    int renderBufferWidth;
-    int renderBufferHeight;
-    
-    CVOpenGLESTextureCacheRef videoTextureCache;
-    
-    EAGLContext *glContext;
-    GLuint frameBuffer;
-    GLuint colorRenderBuffer;
-    GLuint program;
-    
-    GLuint yTexture;
-    GLuint uvTexture;
-    
     Render *_render;
 }
 

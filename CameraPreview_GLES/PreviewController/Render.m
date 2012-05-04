@@ -12,7 +12,7 @@
 @implementation Render
 
 //#ifdef __IPHONE_5_0
-#define TextureFastUpload   0
+
 //#endif
 //
 
@@ -92,7 +92,7 @@ GLint uniformLocation[NUM_UNIFORMS] = {
 		success = NO;
 	}
     
-//#ifdef __IPHONE_5_0
+#if TextureFastUpload
     
     // creat a new CVOpenGLESTexture cache;
     CVReturn error = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, glContext,
@@ -103,8 +103,8 @@ GLint uniformLocation[NUM_UNIFORMS] = {
         success = NO;
     }
     
-//#else
-//#endif
+#else
+#endif
     
     //    // load vertex and shaders
     const GLchar *vertSrc = [self readFile:@"process.vsh"];
@@ -217,45 +217,6 @@ GLint uniformLocation[NUM_UNIFORMS] = {
     unsigned char *YUV2[2] = {0};
     YUV2[0] = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
     YUV2[1] = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
-    CVReturn renturn = CVPixelBufferCreateWithPlanarBytes(kCFAllocatorDefault,
-                                                          width, 
-                                                          height,
-                                                          kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange, 
-                                                          nil,
-                                                          0,
-                                                          2, 
-                                                          (void *)YUV2,
-                                                          planeWidth,
-                                                          planeHeight, 
-                                                          planeBytesPerRow, 
-                                                          nil,
-                                                          nil, nil, &imageBuffer);
-    
-    // Periodic texture cache flush every frame
-    
-    // The Buffer cannot be used with OpenGL as either its size, pixelformat or attributes are not supported by OpenGL
-    glActiveTexture(GL_TEXTURE0);
-    CVOpenGLESTextureRef texture = NULL;
-    CVReturn err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, 
-                                                                videoTextureCache,
-                                                                imageBuffer,
-                                                                NULL,
-                                                                GL_TEXTURE_2D,
-                                                                GL_LUMINANCE,
-                                                                width,
-                                                                height,
-                                                                GL_LUMINANCE,
-                                                                GL_UNSIGNED_BYTE,
-                                                                0,
-                                                                &texture);
-    
-    if (!texture || err) {
-        NSLog(@"CVOpenGLESTextureCacheCreateTextureFromImage failed (error: %d)", err);  
-        return;
-    }
-    CVOpenGLESTextureCacheFlush(videoTextureCache, 0);
-   // free(YUV[0]);
-    //free(YUV[1]);
     
     return imageBuffer;
 }
@@ -317,14 +278,15 @@ GLint uniformLocation[NUM_UNIFORMS] = {
 - (void)displayPixelBuffer:(CVImageBufferRef)pixelBuffer
 {    
     
+    size_t width = CVPixelBufferGetWidth(pixelBuffer);
+    size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    
+#if TextureFastUpload
+    
     if (videoTextureCache == NULL)
     {
         return;
     }
-    size_t width = CVPixelBufferGetWidth(pixelBuffer);
-    size_t height = CVPixelBufferGetHeight(pixelBuffer);
-#if TextureFastUpload
-    
     // Creat a CVOpenGLLESTexture from the CVImageBuffer
     CVOpenGLESTextureRef texture = NULL;
     CVReturn err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
