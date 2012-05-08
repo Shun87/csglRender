@@ -12,7 +12,7 @@
 @implementation Render
 
 //#ifdef __IPHONE_5_0
-
+#define TextureFastUpload   0
 //#endif
 //
 
@@ -25,7 +25,8 @@ enum
 
 enum {
     UNIFORM_Y,
-    UNIFORM_UV,
+    UNIFORM_U,
+    UNIFORM_V,
     NUM_UNIFORMS
 };
 
@@ -35,7 +36,7 @@ GLint attribLocation[NUM_ATTRIBUTES] = {
 };
 
 GLint uniformLocation[NUM_UNIFORMS] = {
-    UNIFORM_Y, UNIFORM_UV,
+    UNIFORM_Y, UNIFORM_U,UNIFORM_V,
 };
 
 - (id)initWithLayer:(CAEAGLLayer *)layer
@@ -92,7 +93,7 @@ GLint uniformLocation[NUM_UNIFORMS] = {
 		success = NO;
 	}
     
-#if TextureFastUpload
+//#ifdef __IPHONE_5_0
     
     // creat a new CVOpenGLESTexture cache;
     CVReturn error = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, glContext,
@@ -103,8 +104,8 @@ GLint uniformLocation[NUM_UNIFORMS] = {
         success = NO;
     }
     
-#else
-#endif
+//#else
+//#endif
     
     //    // load vertex and shaders
     const GLchar *vertSrc = [self readFile:@"process.vsh"];
@@ -116,7 +117,7 @@ GLint uniformLocation[NUM_UNIFORMS] = {
     };
     
     GLchar *uniformName[NUM_UNIFORMS] = {
-        "SamplerY", "SamplerUV",  
+        "SamplerY", "SamplerU", "SamplerV"
     };
     
     glueCreateProgram(vertSrc, fragSrc,
@@ -146,7 +147,8 @@ GLint uniformLocation[NUM_UNIFORMS] = {
     // 0 ==> GL_TEXTURE0
     // 1 ==> GL_TEXTURE1
 	glUniform1i(uniformLocation[UNIFORM_Y], 0);	
-    glUniform1i(uniformLocation[UNIFORM_UV], 1);
+    glUniform1i(uniformLocation[UNIFORM_U], 1);
+    glUniform1i(uniformLocation[UNIFORM_V], 2);
     
     // 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -156,79 +158,16 @@ GLint uniformLocation[NUM_UNIFORMS] = {
     [glContext presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-- (CGRect)textureSamplingRectForCroppingTextureWithAspectRatio:(CGSize)textureAspectRatio toAspectRatio:(CGSize)croppingAspectRatio
-{
-	CGRect normalizedSamplingRect = CGRectZero;	
-	CGSize cropScaleAmount = CGSizeMake(croppingAspectRatio.width / textureAspectRatio.width, croppingAspectRatio.height / textureAspectRatio.height);
-	CGFloat maxScale = fmax(cropScaleAmount.width, cropScaleAmount.height);
-	CGSize scaledTextureSize = CGSizeMake(textureAspectRatio.width * maxScale, textureAspectRatio.height * maxScale);
-	
-	if ( cropScaleAmount.height > cropScaleAmount.width ) {
-		normalizedSamplingRect.size.width = croppingAspectRatio.width / scaledTextureSize.width;
-		normalizedSamplingRect.size.height = 1.0;
-	}
-	else {
-		normalizedSamplingRect.size.height = croppingAspectRatio.height / scaledTextureSize.height;
-		normalizedSamplingRect.size.width = 1.0;
-	}
-	// Center crop
-	normalizedSamplingRect.origin.x = (1.0 - normalizedSamplingRect.size.width)/2.0;
-	normalizedSamplingRect.origin.y = (1.0 - normalizedSamplingRect.size.height)/2.0;
-	
-	return normalizedSamplingRect;
-}
-
-- (CVImageBufferRef)creatPixelBuffer:(CVImageBufferRef)pixelBuffer
-{
-    size_t width = CVPixelBufferGetWidth(pixelBuffer);
-    size_t height = CVPixelBufferGetHeight(pixelBuffer);
-    
-    unsigned char *YUV[2] = {0};
-    
-    // y
-    YUV[0] = (unsigned char *)malloc(width * height);
-    assert(YUV[0] != NULL);
-    memset(YUV[0], 0, width*height);
-  
-    void *base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-    size_t byte = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
-    memcpy(YUV[0], base, width*height);
-    
-   
-    
-    // uv
-    int uv_height = height/2;
-    int uv_width = width/2;
-    size_t byte2 = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
-    base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
-    YUV[1] = (unsigned char *)malloc(byte2 * uv_height);
-    assert(YUV[1] != NULL);
-    memset(YUV[1], 0, byte2*uv_height);
-    memcpy(YUV[1], base, byte2*uv_height);
-    
-    
-//    size_t planeWidth[2] = {width, uv_width};
-//    size_t planeHeight[2] = {height, uv_height};
-//    size_t planeBytesPerRow[2] = {byte2, byte2};
-
-    size_t planeWidth[2] = {CVPixelBufferGetWidthOfPlane(pixelBuffer, 0), CVPixelBufferGetWidthOfPlane(pixelBuffer, 1)};
-    size_t planeHeight[2] = {CVPixelBufferGetHeightOfPlane(pixelBuffer, 0), CVPixelBufferGetHeightOfPlane(pixelBuffer, 1)};
-    size_t planeBytesPerRow[2] = {CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0), CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1)};
-    unsigned char *YUV2[2] = {0};
-    YUV2[0] = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-    YUV2[1] = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
-    
-    return imageBuffer;
-}
-
+uint8_t uBuffer[320*240];
+uint8_t vBuffer[320 *240];
 - (void)uploadTexture:(GLuint *)texture pixelBuffer:(CVImageBufferRef)pixelBuffer plane:(NSInteger)index
 {
     size_t width = CVPixelBufferGetWidth(pixelBuffer);
     size_t height = CVPixelBufferGetHeight(pixelBuffer);
     GLuint type = GL_LUMINANCE;
-    if (index == 1)
+    if (index != 0)
     {
-        type = GL_LUMINANCE_ALPHA;
+        type = GL_LUMINANCE;
         width = width/2;
         height = height/2;
     }
@@ -255,32 +194,40 @@ GLint uniformLocation[NUM_UNIFORMS] = {
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, type, GL_UNSIGNED_BYTE, yData);
         free(yData);
     }
-    else
+    else if(index == 1)
     {
         void *base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
         size_t byte = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
-        unsigned char *yData = (unsigned char *)malloc(byte * height);
-        assert(yData != NULL);
-        memset(yData, 0, byte*height);
-        memcpy(yData, base, byte*height);
+        size_t uByte = byte/2;
         
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, type, GL_UNSIGNED_BYTE, yData);
-        free(yData);
+        memset(vBuffer, 0, uByte*height);
+        memset(uBuffer, 0, uByte*height);
+        uint8_t *uTemp = uBuffer;
+        uint8_t *vTemp = vBuffer;
+        for (int i=0; i<height; i++)
+        {
+            for (int i=0; i<byte/2; i++)
+            {
+                *uTemp++ = *(unsigned char *)base++;
+                *vTemp++ = *(unsigned char *)base++;
+            }
+        }
+
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, type, GL_UNSIGNED_BYTE, uBuffer);
+    }
+    else
+    {
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, type, GL_UNSIGNED_BYTE, vBuffer);
     }
     
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// This is necessary for non-power-of-two textures
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 }
 
 - (void)displayPixelBuffer:(CVImageBufferRef)pixelBuffer
 {    
-    
-    size_t width = CVPixelBufferGetWidth(pixelBuffer);
-    size_t height = CVPixelBufferGetHeight(pixelBuffer);
-    
 #if TextureFastUpload
     
     if (videoTextureCache == NULL)
@@ -326,13 +273,14 @@ GLint uniformLocation[NUM_UNIFORMS] = {
     }
     
     [self uploadTexture:&yTexture pixelBuffer:pixelBuffer plane:0];
-    
-    [self uploadTexture:&uvTexture pixelBuffer:pixelBuffer plane:1];
-    
+    [self uploadTexture:&uTexture pixelBuffer:pixelBuffer plane:1];
+    [self uploadTexture:&vTexture pixelBuffer:pixelBuffer plane:2];
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, yTexture);
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, uvTexture);
+    glBindTexture(GL_TEXTURE_2D, uTexture);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, vTexture);
 //    
 #endif
     

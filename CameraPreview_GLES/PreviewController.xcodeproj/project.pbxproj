@@ -35,7 +35,7 @@
 		FA05365B151CF110005D0842 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FA053661151CFCDF005D0842 /* process.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = process.fsh; path = PreviewController/process.fsh; sourceTree = "<group>"; };
 		FA053662151CFCDF005D0842 /* process.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = process.vsh; path = PreviewController/process.vsh; sourceTree = "<group>"; };
-		FABFBA57151C2622002CDD29 /* PreviewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PreviewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FABFBA57151C2622002CDD29 /* iMCU2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMCU2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABFBA5B151C2622002CDD29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FABFBA5D151C2622002CDD29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FABFBA5F151C2622002CDD29 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,7 +97,7 @@
 		FABFBA58151C2622002CDD29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FABFBA57151C2622002CDD29 /* PreviewController.app */,
+				FABFBA57151C2622002CDD29 /* iMCU2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 			);
 			name = PreviewController;
 			productName = PreviewController;
-			productReference = FABFBA57151C2622002CDD29 /* PreviewController.app */;
+			productReference = FABFBA57151C2622002CDD29 /* iMCU2.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -262,7 +262,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gao YuanBiao (K3B6V3NMMW)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -278,6 +278,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CECEF313-B369-4263-918C-977B6C03C8D5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -308,7 +309,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PreviewController/PreviewController-Prefix.pch";
 				INFOPLIST_FILE = "PreviewController/PreviewController-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iMCU2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -319,7 +320,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PreviewController/PreviewController-Prefix.pch";
 				INFOPLIST_FILE = "PreviewController/PreviewController-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iMCU2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

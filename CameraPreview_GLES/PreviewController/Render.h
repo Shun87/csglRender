@@ -9,19 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES2/glext.h>
-#import <CoreVideo/CoreVideo.h>
-#import <QuartzCore/CAEAGLLayer.h>
-
-#define TextureFastUpload   0
-
-#if TextureFastUpload
 #import <CoreVideo/CVOpenGLESTextureCache.h>
-#endif    
+#import <QuartzCore/CAEAGLLayer.h>
 
 @interface Render : NSObject
 {
     int renderBufferWidth;
     int renderBufferHeight;
+    
+    CVOpenGLESTextureCacheRef videoTextureCache;
     
     EAGLContext *glContext;
     GLuint frameBuffer;
@@ -29,16 +25,13 @@
     GLuint program;
     
     GLuint yTexture;
-    GLuint uvTexture;
+    GLuint uTexture;
+    GLuint vTexture;
     
     CAEAGLLayer *_layer;
     
     CVPixelBufferRef imageBuffer;
-    
-#if TextureFastUpload
-    CVOpenGLESTextureCache *videoTextureCache
-#endif    
-    
+    uint8_t *yuvBuffer[3];
 }
 - (void)displayPixelBuffer:(CVImageBufferRef)pixelBuffer;
 - (id)initWithLayer:(CAEAGLLayer *)layer;
