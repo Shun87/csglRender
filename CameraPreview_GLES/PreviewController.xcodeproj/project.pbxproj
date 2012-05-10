@@ -11,6 +11,10 @@
 		FA05365C151CF110005D0842 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA05365B151CF110005D0842 /* CoreMedia.framework */; };
 		FA053665151CFCF5005D0842 /* process.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FA053661151CFCDF005D0842 /* process.fsh */; };
 		FA053666151CFCF5005D0842 /* process.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FA053662151CFCDF005D0842 /* process.vsh */; };
+		FABA7611155A536C005B7F59 /* libbz2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FABA7610155A536C005B7F59 /* libbz2.1.0.dylib */; };
+		FABA7613155A5377005B7F59 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FABA7612155A5377005B7F59 /* libz.dylib */; };
+		FABA762C155B9B64005B7F59 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABA762B155B9B64005B7F59 /* MessageUI.framework */; };
+		FABA7643155BCC54005B7F59 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FABA7640155BCC54005B7F59 /* libx264.a */; };
 		FABFBA5C151C2622002CDD29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABFBA5B151C2622002CDD29 /* UIKit.framework */; };
 		FABFBA5E151C2622002CDD29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABFBA5D151C2622002CDD29 /* Foundation.framework */; };
 		FABFBA60151C2622002CDD29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABFBA5F151C2622002CDD29 /* CoreGraphics.framework */; };
@@ -35,6 +39,12 @@
 		FA05365B151CF110005D0842 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FA053661151CFCDF005D0842 /* process.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = process.fsh; path = PreviewController/process.fsh; sourceTree = "<group>"; };
 		FA053662151CFCDF005D0842 /* process.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = process.vsh; path = PreviewController/process.vsh; sourceTree = "<group>"; };
+		FABA7610155A536C005B7F59 /* libbz2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.dylib; path = usr/lib/libbz2.1.0.dylib; sourceTree = SDKROOT; };
+		FABA7612155A5377005B7F59 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		FABA762B155B9B64005B7F59 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FABA7640155BCC54005B7F59 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
+		FABA7641155BCC54005B7F59 /* x264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264.h; sourceTree = "<group>"; };
+		FABA7642155BCC54005B7F59 /* x264_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264_config.h; sourceTree = "<group>"; };
 		FABFBA57151C2622002CDD29 /* iMCU2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMCU2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABFBA5B151C2622002CDD29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FABFBA5D151C2622002CDD29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -68,6 +78,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FABA762C155B9B64005B7F59 /* MessageUI.framework in Frameworks */,
+				FABA7613155A5377005B7F59 /* libz.dylib in Frameworks */,
+				FABA7611155A536C005B7F59 /* libbz2.1.0.dylib in Frameworks */,
 				FACA3A3C151D000E001125EC /* MobileCoreServices.framework in Frameworks */,
 				FACA3A3A151CFFF4001125EC /* AssetsLibrary.framework in Frameworks */,
 				FA05365C151CF110005D0842 /* CoreMedia.framework in Frameworks */,
@@ -78,15 +91,37 @@
 				FABFBA5C151C2622002CDD29 /* UIKit.framework in Frameworks */,
 				FABFBA5E151C2622002CDD29 /* Foundation.framework in Frameworks */,
 				FABFBA60151C2622002CDD29 /* CoreGraphics.framework in Frameworks */,
+				FABA7643155BCC54005B7F59 /* libx264.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA908C49155A1B2900E164DE /* csglEngine */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = csglEngine;
+			path = ../../../../../../Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES/csglEngine;
+			sourceTree = "<group>";
+		};
+		FABA763F155BCC54005B7F59 /* x264 */ = {
+			isa = PBXGroup;
+			children = (
+				FABA7640155BCC54005B7F59 /* libx264.a */,
+				FABA7641155BCC54005B7F59 /* x264.h */,
+				FABA7642155BCC54005B7F59 /* x264_config.h */,
+			);
+			name = x264;
+			path = ../../../../../../Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES/x264;
+			sourceTree = "<group>";
+		};
 		FABFBA4C151C2621002CDD29 = {
 			isa = PBXGroup;
 			children = (
+				FABA762B155B9B64005B7F59 /* MessageUI.framework */,
+				FA908C49155A1B2900E164DE /* csglEngine */,
 				FACA3A4D151D0454001125EC /* Shader */,
 				FABFBA61151C2622002CDD29 /* PreviewController */,
 				FABFBA5A151C2622002CDD29 /* Frameworks */,
@@ -105,6 +140,9 @@
 		FABFBA5A151C2622002CDD29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FABA763F155BCC54005B7F59 /* x264 */,
+				FABA7612155A5377005B7F59 /* libz.dylib */,
+				FABA7610155A536C005B7F59 /* libbz2.1.0.dylib */,
 				FACA3A3B151D000E001125EC /* MobileCoreServices.framework */,
 				FACA3A39151CFFF4001125EC /* AssetsLibrary.framework */,
 				FA05365B151CF110005D0842 /* CoreMedia.framework */,
@@ -277,6 +315,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CECEF313-B369-4263-918C-977B6C03C8D5";
 				SDKROOT = iphoneos;
@@ -296,6 +335,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -309,6 +349,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PreviewController/PreviewController-Prefix.pch";
 				INFOPLIST_FILE = "PreviewController/PreviewController-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES/ffmpeg/armv7,
+					/Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES,
+					/Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES/x264,
+				);
 				PRODUCT_NAME = iMCU2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -320,6 +366,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PreviewController/PreviewController-Prefix.pch";
 				INFOPLIST_FILE = "PreviewController/PreviewController-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES/ffmpeg/armv7,
+					/Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES,
+					/Users/MacBook/Crearo/Program/csglRender/CameraPreview_GLES/x264,
+				);
 				PRODUCT_NAME = iMCU2;
 				WRAPPER_EXTENSION = app;
 			};

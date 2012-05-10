@@ -159,7 +159,7 @@ GLint uniformLocation[NUM_UNIFORMS] = {
 }
 
 uint8_t uBuffer[320*240];
-uint8_t vBuffer[320 *240];
+uint8_t vBuffer[320*240];
 - (void)uploadTexture:(GLuint *)texture pixelBuffer:(CVImageBufferRef)pixelBuffer plane:(NSInteger)index
 {
     size_t width = CVPixelBufferGetWidth(pixelBuffer);
@@ -302,16 +302,6 @@ uint8_t vBuffer[320 *240];
         0.0f,  0.0f,
     };
     
-    // The texture vertices are set up such that we flip the texture vertically.
-	// This is so that our top left origin buffers match OpenGL's bottom left texture coordinate system.
-    //	CGRect textureSamplingRect = [self textureSamplingRectForCroppingTextureWithAspectRatio:CGSizeMake(width, height) toAspectRatio:self.bounds.size];
-    //	GLfloat textureVertices[] = {
-    //		CGRectGetMinX(textureSamplingRect), CGRectGetMaxY(textureSamplingRect),
-    //		CGRectGetMaxX(textureSamplingRect), CGRectGetMaxY(textureSamplingRect),
-    //		CGRectGetMinX(textureSamplingRect), CGRectGetMinY(textureSamplingRect),
-    //		CGRectGetMaxX(textureSamplingRect), CGRectGetMinY(textureSamplingRect),
-    //	};
-	
     // Draw the texture on the screen with OpenGL ES 2
     [self renderWithSquareVertices:squareVertices textureVertices:textureVertices3];
     

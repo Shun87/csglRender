@@ -10,11 +10,15 @@
 #import "GLView.h"
 #import "VideoProcessor.h"
 
-@interface ViewController : UIViewController<VideoProcessorDelegate>
+#import <MessageUI/MessageUI.h>
+@interface ViewController : UIViewController<VideoProcessorDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate>
 {
     VideoProcessor *processor;
     GLView *glView;
     UIView *backView;
+    
 }
 @property (nonatomic, retain) IBOutlet UIView *backView;
+
+- (IBAction)btnSend:(id)sender;
 @end
