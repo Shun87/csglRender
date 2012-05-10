@@ -13,8 +13,6 @@ void main()
     
     yuv.x = texture2D(SamplerY, coordinate).r;
     
-   // yuv.yz = texture2D(SamplerU, coordinate).ra - vec2(0.5, 0.5);
-    
     yuv.y = texture2D(SamplerU, coordinate).r - 0.5;
     
     yuv.z = texture2D(SamplerV, coordinate).r - 0.5;
