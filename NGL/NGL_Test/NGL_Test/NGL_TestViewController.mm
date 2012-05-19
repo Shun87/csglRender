@@ -9,8 +9,32 @@
 #import "NGL_TestViewController.h"
 #import "NGLView.h"
 #include "CoreEngine.h"
+#include "NGL.h"
 
 @implementation NGL_TestViewController
+
+char fragment[] = 
+"varying lowp vec4 color;\n"
+
+"void main( void ) {\n"
+
+"gl_FragColor = color;}\n";
+
+char vertext[] = 
+"uniform mediump mat4 MODELVIEWPROJECTIONMATRIX;\n"
+
+"attribute mediump vec4 POSITION;\n"
+
+"attribute lowp vec4 COLOR;\n"
+
+"varying lowp vec4 color;\n"
+
+"void main( void ) {\n"
+    
+"	gl_Position = POSITION;\n"
+    
+"	color = COLOR;\n}";
+
 
 CoreEngine *s_pEngine;
 #pragma mark - View lifecycle
@@ -32,7 +56,14 @@ CoreEngine *s_pEngine;
     
     [(NGLView *)self.view presentFramebuffer];
 }
-
+- (GLchar *)readFile:(NSString *)name
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:nil];
+     GLchar *source = (GLchar *)[[NSString stringWithContentsOfFile:path 
+                                                                encoding:NSUTF8StringEncoding 
+                                                                   error:nil]UTF8String];
+    return source;
+}
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -41,7 +72,8 @@ CoreEngine *s_pEngine;
     int nWidth = CGRectGetWidth(rect);
     int nHeight = CGRectGetHeight(rect);
     s_pEngine = CoreEngine::Creat(nWidth, nHeight);
-    
+    NGLProgram *program = new NGLProgram(vertext, fragment);
+    program->CreatProgram();
     [self setupDisplayLink];
 }
 

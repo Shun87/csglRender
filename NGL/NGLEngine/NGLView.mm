@@ -6,8 +6,8 @@
 //  Copyright 2012年 chenshun. All rights reserved.
 //
 
-#import "NGLView.h"
 
+#import "NGLView.h"
 @implementation NGLView
 
 + (Class)layerClass
@@ -55,6 +55,10 @@
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                   GL_RENDERBUFFER, colorRenderBuffer);
         
+        glGenRenderbuffers(1, &depthRenderbuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, renderBufferWidth, renderBufferHeight);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
         if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) 
         {
             NSLog(@"Failure with framebuffer generation");

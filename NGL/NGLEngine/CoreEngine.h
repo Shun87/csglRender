@@ -15,7 +15,12 @@ public:
     ~CoreEngine();
     
     static CoreEngine *Creat(int nWidth, int nHeight);
+    void Start();
     void Draw();
+
+protected:
+    char *m_pVertext;
+    char *m_pFragment;
 };
 
 
