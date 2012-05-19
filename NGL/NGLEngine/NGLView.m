@@ -15,11 +15,6 @@
     return [CAEAGLLayer class];
 }
 
-- (void)setupDisplayLink {
-    CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];    
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -39,7 +34,6 @@
             NSLog(@"opengl context init failed");
         }
         [self setFramebuffer];
-        [self setupDisplayLink];
     }
     return self;
 }
@@ -94,15 +88,5 @@
     
     return success;
 }
-
-- (void)render:(CADisplayLink*)displayLink {
-    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
-    
-    
-    [self presentFramebuffer];
-}
-
 
 @end

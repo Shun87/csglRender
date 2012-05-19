@@ -6,9 +6,17 @@
 //  Copyright 2012年 chenshun. All rights reserved.
 //
 
-#ifndef NGL_Test_CoreEngine____H___
-#define NGL_Test_CoreEngine____H___
+#ifndef _CoreEngine____H___
+#define _CoreEngine____H___
 
+class CoreEngine {
+public:
+    CoreEngine(int nWidth, int nHeight);
+    ~CoreEngine();
+    
+    static CoreEngine *Creat(int nWidth, int nHeight);
+    void Draw();
+};
 
 
 #endif

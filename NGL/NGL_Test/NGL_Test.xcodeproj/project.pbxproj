@@ -12,13 +12,14 @@
 		04D10D31156743CD00120250 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D10D30156743CD00120250 /* CoreGraphics.framework */; };
 		04D10D37156743CD00120250 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04D10D35156743CD00120250 /* InfoPlist.strings */; };
 		04D10D39156743CD00120250 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D38156743CD00120250 /* main.m */; };
-		04D10D3D156743CD00120250 /* NGL_TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D3C156743CD00120250 /* NGL_TestAppDelegate.m */; };
+		04D10D3D156743CD00120250 /* NGL_TestAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D3C156743CD00120250 /* NGL_TestAppDelegate.mm */; };
 		04D10D40156743CD00120250 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D10D3E156743CD00120250 /* MainWindow.xib */; };
-		04D10D43156743CD00120250 /* NGL_TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D42156743CD00120250 /* NGL_TestViewController.m */; };
+		04D10D43156743CD00120250 /* NGL_TestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D42156743CD00120250 /* NGL_TestViewController.mm */; };
 		04D10D46156743CD00120250 /* NGL_TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D10D44156743CD00120250 /* NGL_TestViewController.xib */; };
 		04D10D4F156743E900120250 /* NGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D4E156743E900120250 /* NGLView.m */; };
 		04D10D511567441900120250 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D10D501567441900120250 /* OpenGLES.framework */; };
 		04D10D531567442000120250 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D10D521567442000120250 /* QuartzCore.framework */; };
+		04D10D6615674C3C00120250 /* CoreEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04D10D6415674C3C00120250 /* CoreEngine.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,15 +32,17 @@
 		04D10D38156743CD00120250 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04D10D3A156743CD00120250 /* NGL_Test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NGL_Test-Prefix.pch"; sourceTree = "<group>"; };
 		04D10D3B156743CD00120250 /* NGL_TestAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NGL_TestAppDelegate.h; sourceTree = "<group>"; };
-		04D10D3C156743CD00120250 /* NGL_TestAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGL_TestAppDelegate.m; sourceTree = "<group>"; };
+		04D10D3C156743CD00120250 /* NGL_TestAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NGL_TestAppDelegate.mm; sourceTree = "<group>"; };
 		04D10D3F156743CD00120250 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		04D10D41156743CD00120250 /* NGL_TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NGL_TestViewController.h; sourceTree = "<group>"; };
-		04D10D42156743CD00120250 /* NGL_TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGL_TestViewController.m; sourceTree = "<group>"; };
+		04D10D42156743CD00120250 /* NGL_TestViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NGL_TestViewController.mm; sourceTree = "<group>"; };
 		04D10D45156743CD00120250 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NGL_TestViewController.xib; sourceTree = "<group>"; };
 		04D10D4D156743E900120250 /* NGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLView.h; sourceTree = "<group>"; };
 		04D10D4E156743E900120250 /* NGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGLView.m; sourceTree = "<group>"; };
 		04D10D501567441900120250 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		04D10D521567442000120250 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		04D10D6415674C3C00120250 /* CoreEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreEngine.cpp; sourceTree = "<group>"; };
+		04D10D6515674C3C00120250 /* CoreEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreEngine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				04D10D3B156743CD00120250 /* NGL_TestAppDelegate.h */,
-				04D10D3C156743CD00120250 /* NGL_TestAppDelegate.m */,
+				04D10D3C156743CD00120250 /* NGL_TestAppDelegate.mm */,
 				04D10D3E156743CD00120250 /* MainWindow.xib */,
 				04D10D41156743CD00120250 /* NGL_TestViewController.h */,
-				04D10D42156743CD00120250 /* NGL_TestViewController.m */,
+				04D10D42156743CD00120250 /* NGL_TestViewController.mm */,
 				04D10D44156743CD00120250 /* NGL_TestViewController.xib */,
 				04D10D33156743CD00120250 /* Supporting Files */,
 			);
@@ -118,6 +121,8 @@
 			children = (
 				04D10D4D156743E900120250 /* NGLView.h */,
 				04D10D4E156743E900120250 /* NGLView.m */,
+				04D10D6415674C3C00120250 /* CoreEngine.cpp */,
+				04D10D6515674C3C00120250 /* CoreEngine.h */,
 			);
 			name = NGLEngine;
 			path = ../NGLEngine;
@@ -187,9 +192,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D10D39156743CD00120250 /* main.m in Sources */,
-				04D10D3D156743CD00120250 /* NGL_TestAppDelegate.m in Sources */,
-				04D10D43156743CD00120250 /* NGL_TestViewController.m in Sources */,
+				04D10D3D156743CD00120250 /* NGL_TestAppDelegate.mm in Sources */,
+				04D10D43156743CD00120250 /* NGL_TestViewController.mm in Sources */,
 				04D10D4F156743E900120250 /* NGLView.m in Sources */,
+				04D10D6615674C3C00120250 /* CoreEngine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +313,7 @@
 				04D10D4B156743CD00120250 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

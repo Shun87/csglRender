@@ -7,32 +7,42 @@
 //
 
 #import "NGL_TestViewController.h"
+#import "NGLView.h"
+#include "CoreEngine.h"
 
 @implementation NGL_TestViewController
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
+CoreEngine *s_pEngine;
 #pragma mark - View lifecycle
 
-/*
+
+- (void)setupDisplayLink {
+    CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render)];
+    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];    
+}
+
+- (void)render
+{
+    [(NGLView *)self.view setFramebuffer];
+    
+    if (NULL !=s_pEngine)
+    {
+        s_pEngine->Draw();
+    }
+    
+    [(NGLView *)self.view presentFramebuffer];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-*/
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    CGRect rect = self.view.frame;
+    int nWidth = CGRectGetWidth(rect);
+    int nHeight = CGRectGetHeight(rect);
+    s_pEngine = CoreEngine::Creat(nWidth, nHeight);
+    
+    [self setupDisplayLink];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
