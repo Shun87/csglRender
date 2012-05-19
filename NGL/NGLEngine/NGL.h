@@ -13,9 +13,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <vector>
+#include <assert.h>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
+#include "CoreEngine.h"
 #include "type.h"
 #include "NGLProgram.h"
 

@@ -25,7 +25,6 @@ NGLProgram::~NGLProgram()
 GLuint NGLProgram::CreatProgram()
 {
     int nStatus = 1;
-    int nTotal = 0;
     m_pid = glCreateProgram();
     
     nStatus *= CompileShader(m_verShader, m_pVerCode, GL_VERTEX_SHADER);
@@ -33,19 +32,20 @@ GLuint NGLProgram::CreatProgram()
     
     glAttachShader(m_pid, m_verShader);
     glAttachShader(m_pid, m_fragShader);
-    
+
     // Link program
 	nStatus *= glueLinkProgram(m_pid);
     if (nStatus != 0)
     {
-        glGetProgramiv(m_pid, GL_ACTIVE_ATTRIBUTES, &nTotal);
-        
         int i = 0;
         char name[MAX_CHAR];
 		int nLen = 0;
 		int nTotal = 0;
 		int nSize = 0;
         GLenum type = 0;
+        
+        glGetProgramiv(m_pid, GL_ACTIVE_ATTRIBUTES, &nTotal);
+        
         while (i != nTotal) 
         {
             glGetActiveAttrib(m_pid,
@@ -61,7 +61,6 @@ GLuint NGLProgram::CreatProgram()
         }
         
         glGetProgramiv(m_pid, GL_ACTIVE_UNIFORMS, &nTotal);
-        
         i = 0;
         while( i != nTotal )
         {

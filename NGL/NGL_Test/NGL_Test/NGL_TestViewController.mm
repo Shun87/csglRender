@@ -13,30 +13,9 @@
 
 @implementation NGL_TestViewController
 
-char fragment[] = 
-"varying lowp vec4 color;\n"
-
-"void main( void ) {\n"
-
-"gl_FragColor = color;}\n";
-
-char vertext[] = 
-"uniform mediump mat4 MODELVIEWPROJECTIONMATRIX;\n"
-
-"attribute mediump vec4 POSITION;\n"
-
-"attribute lowp vec4 COLOR;\n"
-
-"varying lowp vec4 color;\n"
-
-"void main( void ) {\n"
-    
-"	gl_Position = POSITION;\n"
-    
-"	color = COLOR;\n}";
-
 
 CoreEngine *s_pEngine;
+
 #pragma mark - View lifecycle
 
 
@@ -52,10 +31,12 @@ CoreEngine *s_pEngine;
     if (NULL !=s_pEngine)
     {
         s_pEngine->Draw();
+        
     }
-    
+	
     [(NGLView *)self.view presentFramebuffer];
 }
+
 - (GLchar *)readFile:(NSString *)name
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:nil];
@@ -72,8 +53,7 @@ CoreEngine *s_pEngine;
     int nWidth = CGRectGetWidth(rect);
     int nHeight = CGRectGetHeight(rect);
     s_pEngine = CoreEngine::Creat(nWidth, nHeight);
-    NGLProgram *program = new NGLProgram(vertext, fragment);
-    program->CreatProgram();
+
     [self setupDisplayLink];
 }
 
