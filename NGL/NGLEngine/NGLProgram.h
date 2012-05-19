@@ -49,6 +49,8 @@ public:
     
     GLuint CreatProgram();
     
+    void FreeProgram();
+    
     char GetVertexAttribLocation(char *pName);
     
     char GetUniformLocation(char *pName);

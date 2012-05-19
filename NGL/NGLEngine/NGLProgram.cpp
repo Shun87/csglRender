@@ -85,6 +85,27 @@ GLuint NGLProgram::CreatProgram()
     return 0;
 }
 
+void NGLProgram::FreeProgram()
+{
+    if (m_pid != 0)
+    {
+        glDeleteProgram(m_pid);
+        m_pid = 0;
+    }
+    
+    if (m_verShader != 0)
+    {
+        glDeleteShader(m_verShader);
+        m_verShader = 0;
+    }
+    
+    if (m_fragShader)
+    {
+        glDeleteShader(m_fragShader);
+        m_fragShader = 0;
+    }
+}
+
 char NGLProgram::GetVertexAttribLocation(char *pName)
 {
     if (m_attribArray.size() > 0)
@@ -170,7 +191,6 @@ int NGLProgram::CompileShader(unsigned int &shader, const char *code, unsigned i
     
     if (bDebug)
     {
-
         GLint logLength;
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
         if (logLength > 0)
