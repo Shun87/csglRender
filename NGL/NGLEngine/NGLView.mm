@@ -68,13 +68,15 @@
 
 - (void)setFramebuffer
 {
-    if (glContext)
+    if ( glContext )
     {
         [EAGLContext setCurrentContext:glContext];
-        if (!frameBuffer)
+        
+        if ( !frameBuffer )
         {
             [self creatFramebuffer];
         }
+        
         glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
     }
 }

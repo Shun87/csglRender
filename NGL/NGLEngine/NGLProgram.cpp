@@ -34,7 +34,7 @@ GLuint NGLProgram::CreatProgram()
     glAttachShader(m_pid, m_fragShader);
 
     // Link program
-	nStatus *= glueLinkProgram(m_pid);
+	nStatus *= LinkProgram(m_pid);
     if (nStatus != 0)
     {
         int i = 0;
@@ -146,7 +146,7 @@ char NGLProgram::GetUniformLocation(char *pName)
 }
 
 /* Link a program with all currently attached shaders */
-GLint NGLProgram::glueLinkProgram(GLuint program, bool bDebug)
+GLint NGLProgram::LinkProgram(GLuint program, bool bDebug)
 {
 	GLint nStatus;
 	

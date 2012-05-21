@@ -69,7 +69,7 @@ protected:
     std::vector<VERTEX_ATTRIB> m_attribArray;
     
 protected:
-    GLint glueLinkProgram(GLuint program, bool bDebug = true);
+    GLint LinkProgram(GLuint program, bool bDebug = true);
     int CompileShader(unsigned int &shader, const char *code, unsigned int type, bool bDebug = true);
     void AddVertexAttrib(char *name, unsigned int type);
     void AddUnifom(char *name, unsigned int type);
