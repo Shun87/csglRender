@@ -85,7 +85,7 @@ void CoreEngine::Draw()
     glUseProgram(program->GetProgramID());
     
     char attribute = 0;
-    char uniform = 0;
+    
     attribute = program->GetVertexAttribLocation(( char * )"POSITION" );
     
     glEnableVertexAttribArray( attribute );

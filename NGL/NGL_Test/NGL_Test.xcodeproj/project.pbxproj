@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C9D3C615751350004E4478 /* NGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9D3C515751350004E4478 /* NGL.cpp */; };
 		04D10D2D156743CD00120250 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D10D2C156743CD00120250 /* UIKit.framework */; };
 		04D10D2F156743CD00120250 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D10D2E156743CD00120250 /* Foundation.framework */; };
 		04D10D31156743CD00120250 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D10D30156743CD00120250 /* CoreGraphics.framework */; };
@@ -24,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04C9D3C515751350004E4478 /* NGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NGL.cpp; sourceTree = "<group>"; };
+		04C9D3C91575137B004E4478 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		04C9D3CC1575138B004E4478 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		04D10D28156743CD00120250 /* NGL_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGL_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D10D2C156743CD00120250 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04D10D2E156743CD00120250 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,7 +48,6 @@
 		04D10D521567442000120250 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		04D10D6415674C3C00120250 /* CoreEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoreEngine.cpp; sourceTree = "<group>"; };
 		04D10D6515674C3C00120250 /* CoreEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreEngine.h; sourceTree = "<group>"; };
-		04D10D9A15677A2700120250 /* type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = type.h; sourceTree = "<group>"; };
 		04D10D9B15677C8600120250 /* NGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGL.h; sourceTree = "<group>"; };
 		04D10DD41567B39600120250 /* NGLProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NGLProgram.cpp; sourceTree = "<group>"; };
 		04D10DD51567B39600120250 /* NGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLProgram.h; sourceTree = "<group>"; };
@@ -130,8 +133,10 @@
 				04D10D6515674C3C00120250 /* CoreEngine.h */,
 				04D10DD41567B39600120250 /* NGLProgram.cpp */,
 				04D10DD51567B39600120250 /* NGLProgram.h */,
-				04D10D9A15677A2700120250 /* type.h */,
 				04D10D9B15677C8600120250 /* NGL.h */,
+				04C9D3C515751350004E4478 /* NGL.cpp */,
+				04C9D3C91575137B004E4478 /* Vector.h */,
+				04C9D3CC1575138B004E4478 /* Matrix.h */,
 			);
 			name = NGLEngine;
 			path = ../NGLEngine;
@@ -206,6 +211,7 @@
 				04D10D4F156743E900120250 /* NGLView.mm in Sources */,
 				04D10D6615674C3C00120250 /* CoreEngine.cpp in Sources */,
 				04D10DD61567B39600120250 /* NGLProgram.cpp in Sources */,
+				04C9D3C615751350004E4478 /* NGL.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
